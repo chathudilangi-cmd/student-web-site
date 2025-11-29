@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subjects - Smart Student Profile Portal 🎓</title>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px; 
+        }
+
+        :root {
+            --header-blue: #00621d; 
+            --light-text: #ffffff;
+            --dark-text: #333333;
+            --secondary-text: #cccccc;
+            --button-color: #006226; 
+            --page-bg: #f4f4f9; 
+            --accent-green: #5cb85c;
+        
+            --footer-bg: #044f1d; 
+        }
+
+        
+        body {
+            background-color: var(--page-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        
+        .header-container {
+            width: 100%;
+            background-color: var(--header-blue);
+            padding: 0 40px; 
+            z-index: 10;
+            color: var(--light-text);
+        }
+        
+        .header-top-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--light-text);
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+        
+        .top-utility a {
+            padding: 8px 15px;
+            border: 1px solid var(--light-text);
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0; 
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .main-nav li a {
+            padding: 10px 15px;
+            font-weight: 500;
+        }
+        
+        .main-nav li a:hover, .main-nav li a.active {
+            color: var(--secondary-text);
+            border-bottom: 2px solid var(--light-text); 
+        }
+
+        .utility-links {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        .utility-links a {
+            margin-left: 25px;
+        }
+        
+        
+        .search-icon::before { content: '🔍'; }
+        .menu-icon::before { content: '☰'; }
+
+       
+        .dashboard-wrapper {
+            flex-grow: 1;
+            padding: 40px;
+            
+            
+            background-image: url('Green-Grads-e1431719736500-1050x500.jpg'); 
+            background-repeat: repeat; 
+            background-size: cover; 
+            background-color: rgba(244, 244, 249, 0.8); 
+        }
+        
+        .subjects-card {
+            background-color: var(--light-text);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px; 
+            margin: 0 auto 30px auto; 
+        }
+        
+        .subjects-header {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--header-blue);
+        }
+        
+        .subjects-header h2 {
+            font-size: 1.8rem;
+            color: var(--header-blue);
+        }
+
+        
+        .subjects-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .subjects-table th, .subjects-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .subjects-table th {
+            background-color: var(--header-blue);
+            color: var(--light-text);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .subjects-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .subjects-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .subjects-table td:last-child {
+            text-align: center; 
+            font-weight: bold;
+            color: #d9534f; 
+        }
+        
+        
+        .subjects-table th:last-child {
+            width: 120px;
+            text-align: center;
+        }
+        .subjects-table td:nth-child(4) {
+             text-align: center;
+        }
+
+
+        
+        .calculation-area {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .calc-button {
+            background-color: var(--accent-green); 
+            color: var(--light-text);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 20px;
+        }
+        
+        .calc-button:hover {
+            background-color: #4cae4c;
+        }
+
+        #totalCreditsDisplay {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--header-blue);
+            margin-left: 10px;
+        }
+        
+        
+        .subject-details-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .detail-card {
+            background-color: var(--light-text);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-top: 5px solid var(--header-blue);
+            transition: transform 0.2s;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-image-wrapper {
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .card-content h3 {
+            font-size: 1.3rem;
+            color: var(--dark-text);
+            margin-bottom: 5px;
+        }
+
+        .card-content .subject-code {
+            font-size: 0.9rem;
+            color: var(--header-blue); 
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .card-content p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.4;
+            margin-bottom: 0;
+        }
+        
+        .view-details-btn {
+            background-color: var(--header-blue); 
+            color: var(--light-text);
+            border: none;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .view-details-btn:hover {
+            background-color: #004d16;
+        }
+
+        
+        .footer-container {
+            width: 100%;
+            background-color: var(--footer-bg); 
+            padding: 30px 40px;
+            text-align: center;
+            color: var(--light-text); 
+            border-top: 1px solid var(--header-blue);
+        }
+        
+        .footer-links {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            margin: 0 10px;
+            font-size: 0.95rem;
+            color: var(--light-text); 
+            text-transform: capitalize;
+        }
+        .footer-links a:hover {
+            color: var(--secondary-text);
+        }
+
+        
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+            }
+            .header-top-info {
+                flex-direction: column;
+                padding: 10px 0;
+            }
+            .top-utility {
+                margin-top: 10px;
+            }
+            .main-nav ul {
+                display: none;
+            }
+            .subject-details-container {
+                 grid-template-columns: 1fr; 
+            }
+            
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <div class="header-top-info">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-icon">🎓</span> 
+                    Smart Student Profile Portal
+                </a>
+            </div>
+            <div class="top-utility">
+                <a href="#">LOGOUT</a>
+            </div>
+        </div>
+        
+        <header class="header-main">
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="subjects.html" class="active">Subjects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="utility-links">
+                <a href="#" class="search-icon" aria-label="Search"></a>
+                <a href="#" class="menu-icon" aria-label="Menu"></a>
+            </div>
+        </header>
+    </div>
+
+    <main class="dashboard-wrapper">
+        <div class="subjects-card">
+            
+            <div class="subjects-header">
+                <h2>Enrolled Subjects (Year 3)</h2>
+            </div>
+            
+            <table class="subjects-table">
+                <thead>
+                    <tr>
+                        <th>Subject Code</th>
+                        <th>Subject Name</th>
+                        <th>Credits</th>
+                        <th>Details</th> </tr>
+                </thead>
+                <tbody id="subjectsTableBody">
+                    <tr>
+                        <td>CS301</td>
+                        <td>Advanced Data Structures</td>
+                        <td class="credit-value">3</td>
+                        <td><button class="view-details-btn" onclick="showSubjectDetails('CS301')">View Details</button></td>
+                    </tr>
+                    <tr>
+                        <td>CS302</td>
+                        <td>Database Management Systems</td>
+                        <td class="credit-value">4</td>
+                        <td><button class="view-details-btn" onclick="showSubjectDetails('CS302')">View Details</button></td>
+                    </tr>
+                    <tr>
+                        <td>SE310</td>
+                        <td>Software Engineering Principles</td>
+                        <td class="credit-value">3</td>
+                        <td><button class="view-details-btn" onclick="showSubjectDetails('SE310')">View Details</button></td>
+                    </tr>
+                    <tr>
+                        <td>MA350</td>
+                        <td>Discrete Mathematics</td>
+                        <td class="credit-value">3</td>
+                        <td><button class="view-details-btn" onclick="showSubjectDetails('MA350')">View Details</button></td>
+                    </tr>
+                    <tr>
+                        <td>GE305</td>
+                        <td>Professional Ethics</td>
+                        <td class="credit-value">2</td>
+                        <td><button class="view-details-btn" onclick="showSubjectDetails('GE305')">View Details</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="calculation-area">
+                <button class="calc-button" onclick="calculateTotalCredits()">
+                    Calculate Total Credits
+                </button>
+                
+                <p>
+                    Total Credits: <span id="totalCreditsDisplay">0</span>
+                </p>
+            </div>
+            
+        </div>
+        
+        <div class="subjects-card" style="margin-top: 30px; padding: 20px;">
+             <div class="subjects-header" style="margin-bottom: 20px; border-bottom: 1px solid #ddd;">
+                <h2>Subject Details Overview</h2>
+                <p style="color:#777; font-size: 0.9rem; margin-top: 5px;" id="subjectDetailsMessage">
+                    Click the View Details button next to a subject in the table to see its detailed card below.
+                </p>
+            </div>
+            
+            <div id="subjectDetailContainer">
+                </div>
+        </div>
+    </main>
+
+    <footer class="footer-container">
+        <div class="footer-links">
+           
+        </div>
+        <p style="color:var(--secondary-text);">@Smart Student Profile Portal | Empowering Future Leaders</p>
+        <p style="color:var(--secondary-text);">&copy; 2025 University Portal. All Rights Reserved.</p>
+    </footer>
+    <script>
+        
+        const subjectData = [
+            {
+                code: 'CS301',
+                name: 'Advanced Data Structures',
+                intro: 'Advanced Data Structures are highly optimized ways of organizing and storing data to solve complex computational problems efficiently, typically achieving performance better than the linear time complexity of basic structures like arrays and linked lists. They are essential for applications requiring fast searching, dynamic updates, and complex data modeling.',
+                image: '1_YEaOWZwXwUxM8bX05G3oRA.jpg' 
+            },
+            {
+                code: 'CS302',
+                name: 'Database Management Systems',
+                intro: 'A Database Management System (DBMS) is software that serves as an interface between users (or applications) and a database. Its primary function is to define, create, query, update, and manage data in an organized way, ensuring its integrity, security, and consistent availability.',
+                image: 'database-157334670-5c29939d46e0fb0001edf766.jpg' 
+            },
+            {
+                code: 'SE310',
+                name: 'Software Engineering Principles',
+                intro: 'Software Engineering Principles are a set of fundamental rules, guidelines, and best practices used to develop high-quality, maintainable, and reliable software systems efficiently. They focus on managing the complexity inherent in large software projects and ensuring the final product meets user needs.',
+                image: 'istockphoto-1386341272-612x612.jpg' 
+            },
+            {
+                code: 'MA350',
+                name: 'Discrete Mathematics',
+                intro: 'Explores foundational topics like logic, set theory, proof techniques, graphs, and combinatorial analysis crucial for computing.',
+                image: 'Mathematics.jpg' 
+            },
+            {
+                code: 'GE305',
+                name: 'Professional Ethics',
+                intro: 'Examines moral obligations, social responsibility, legal issues, and ethical decision-making in a professional industry setting.',
+                image: 'Gaisuwa.jpg' 
+            }
+        ];
+
+
+        
+        function calculateTotalCredits() {
+            const creditCells = document.querySelectorAll('.credit-value');
+            let total = 0;
+
+            creditCells.forEach(cell => {
+                const credit = parseInt(cell.textContent, 10);
+                if (!isNaN(credit)) {
+                    total += credit;
+                }
+            });
+
+            document.getElementById('totalCreditsDisplay').textContent = total;
+        }
+
+        
+        function showSubjectDetails(subjectCode) {
+            const detailContainer = document.getElementById('subjectDetailContainer');
+            const subject = subjectData.find(s => s.code === subjectCode);
+
+            if (!subject) {
+                detailContainer.innerHTML = '<p style="color:red;">Subject details not found.</p>';
+                return;
+            }
+            
+            
+            const cardHtml = `
+                <div class="subject-details-container">
+                    <div class="detail-card">
+                        <div class="card-image-wrapper">
+                            <img src="${subject.image}" alt="Image for ${subject.name}" class="card-image">
+                        </div>
+                        <div class="card-content">
+                            <h3>${subject.name}</h3>
+                            <span class="subject-code">${subject.code}</span>
+                            <p>${subject.intro}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+           
+            detailContainer.innerHTML = cardHtml;
+            document.getElementById('subjectDetailsMessage').textContent = `Details shown for: ${subject.name} (${subject.code})`;
+
+            
+            document.querySelector('.subjects-card:last-of-type').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,440 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Student Profiles 🎓</title>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif; 
+        }
+
+        :root {
+            --header-blue: #002d62; 
+            --light-text: #ffffff;
+            --dark-text: #333333; 
+            --secondary-text: #cccccc;
+            --button-color: #002d62; 
+            --footer-bg: #001f40;
+            --card-bg: #ffffff; 
+            --accent-color: #007bff; 
+        }
+
+       
+        body {
+            font-size: 16px; 
+            background-color: #10192e; 
+            color: var(--light-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--secondary-text);
+        }
+
+        
+        .header-container {
+            width: 100%;
+            background-color: var(--header-blue);
+            padding: 0 40px; 
+            position: relative;
+            z-index: 10;
+        }
+        
+        .header-top-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem; 
+            font-weight: bold;
+            color: var(--light-text);
+        }
+
+        .logo-icon {
+            font-size: 2rem; 
+            margin-right: 10px;
+            line-height: 1;
+        }
+        
+        .top-utility a {
+            padding: 8px 15px;
+            border: 1px solid var(--light-text);
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0; 
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .main-nav li a {
+            padding: 10px 15px;
+            font-weight: 500;
+        }
+        
+        .main-nav li a.active {
+            border-bottom: 2px solid var(--light-text); 
+        }
+
+        .utility-links {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem; 
+        }
+
+        .utility-links a {
+            margin-left: 25px;
+        }
+        
+        .search-icon::before { content: '🔍'; }
+        .menu-icon::before { content: '☰'; }
+
+        
+        .dashboard-wrapper {
+            flex-grow: 1;
+            padding: 40px 20px;
+            
+            background-image: linear-gradient(rgba(14, 14, 15, 0.85), rgba(211, 217, 231, 0.85)), url('pngtree-high-school-graduates-students-university-people-finish-photo-image_42808838.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .dashboard-header {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            color: var(--light-text);
+            text-align: center;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            color: var(--light-text);
+        }
+
+        
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        
+        .student-card {
+            background-color: var(--card-bg); 
+            color: var(--dark-text);
+            width: 100%;
+            max-width: 350px; 
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .student-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            margin: 0 auto 15px;
+        }
+        
+        .card-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--header-blue);
+            margin-bottom: 10px;
+        }
+
+        
+        .card-details {
+            text-align: left;
+            margin-bottom: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ddd;
+        }
+
+        .card-details div {
+            display: flex;
+            
+            justify-content: space-between; 
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .card-details strong {
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .card-details span {
+            font-weight: 400;
+            color: var(--dark-text);
+            max-width: 60%;
+            text-align: right; 
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        
+
+        .edit-button {
+            background-color: #2e2571;
+            color: var(--light-text);
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        .edit-button:hover {
+            background-color: #6a657d; 
+        }
+
+       
+        .footer-container {
+            width: 100%;
+            background-color: var(--footer-bg);
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 1px solid var(--header-blue);
+        }
+        
+        .footer-links {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            margin: 0 10px;
+            font-size: 0.95rem;
+            color: var(--secondary-text);
+            text-transform: capitalize;
+        }
+
+       
+        @media (max-width: 1024px) {
+            .main-nav ul {
+                display: none; 
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container, .footer-container {
+                padding: 0 20px;
+            }
+            .header-top-info {
+                flex-direction: column;
+                padding: 10px 0;
+            }
+            .top-utility {
+                margin-top: 10px;
+            }
+            .dashboard-wrapper {
+                padding: 20px 10px;
+            }
+            .student-card {
+                max-width: 90%; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <div class="header-top-info">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-icon">🎓</span> 
+                    Smart Student Profile Portal
+                </a>
+            </div>
+            <div class="top-utility">
+                <a href="#">LOGOUT</a>
+            </div>
+        </div>
+        
+        <header class="header-main">
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="profile.html" class="active">Profile</a></li>
+                    <li><a href="subjects.html">Subjects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="utility-links">
+                <a href="#" class="search-icon" aria-label="Search"></a>
+                <a href="#" class="menu-icon" aria-label="Menu"></a>
+            </div>
+        </header>
+    </div>
+
+    <main class="dashboard-wrapper">
+        <div class="dashboard-header">
+            <h1>Student Profile Dashboard</h1>
+            <p style="color:var(--secondary-text);">Quick view of key student records. Click 'Edit Details' to modify information.</p>
+        </div>
+
+        <div class="card-container">
+            
+            <div class="student-card">
+                <img src="yuan_1700x1700.jpg" alt="Profile Picture" class="card-photo">
+                <p class="card-name">Avery John Thompson</p>
+                
+                <div class="card-details">
+                    <div>
+                        <strong>Registration Number: 2023 / S-12345</strong> 
+                        
+                    </div>
+                    <div>
+                        <strong>Program / Year: B.Sc. Computer Science / Y3</strong> 
+                       
+                    </div>
+                    <div>
+                        <strong>Email: a.thompson@student.edu</strong> 
+                        
+                    </div>
+                </div>
+                <button class="edit-button" onclick="alert('Editing Avery Thompson...')">Edit Details</button>
+            </div>
+
+            <div class="student-card">
+                <img src="c52a8a9e-d127-495e-8bf1-41ed5ff06656.jpg" alt="Profile Picture" class="card-photo">
+                <p class="card-name">Emily Kiwenya</p>
+                
+                <div class="card-details">
+                    <div>
+                        <strong>Registration Number: 2024 / A-90123</strong> 
+                        
+                    </div>
+                    <div>
+                        <strong>Program / Year: B.A. Business Admin / Y2</strong> 
+                        
+                    </div>
+                    <div>
+                        <strong>Email:e.lee@student.edu</strong> 
+                        
+                    </div>
+                </div>
+                <button class="edit-button" onclick="alert('Editing Emily Lee...')">Edit Details</button>
+            </div>
+
+            <div class="student-card">
+                <img src="IMG_9136-900x563.jpg" alt="Profile Picture" class="card-photo">
+                <p class="card-name">Michael James Alves</p>
+                
+                <div class="card-details">
+                    <div>
+                        <strong>Registration Number: 2022 / G-45678</strong> 
+                        
+                    </div>
+                    <div>
+                        <strong>Program / Year: B.Eng. Mechanical Eng. / Y4</strong> 
+                        
+                    </div>
+                    <div>
+                        <strong>Email: m.alves@student.edu</strong> 
+                        
+                    </div>
+                </div>
+                <button class="edit-button" onclick="alert('Editing Michael Alves...')">Edit Details</button>
+            </div>
+
+            <div class="student-card">
+                <img src="emileigh_harrison_cropped.jpg" alt="Profile Picture" class="card-photo">
+                <p class="card-name">Sophia Rose Adams</p>
+                
+                <div class="card-details">
+                    <div>
+                        <strong>Registration Number: 2025 / F-11223</strong> 
+                        
+                    </div>
+                    <div>
+                        <strong>Program / Year: B.Sc. Data Science / Y1</strong> 
+                        
+                    </div>
+                    <div>
+                        <strong>Email: s.adams@studenut.ed</strong> 
+                        
+                    </div>
+                </div>
+                <button class="edit-button" onclick="alert('Editing Sophia Adams...')">Edit Details</button>
+            </div>
+            
+            <div class="student-card">
+                <img src="Alex-Short.jpg" alt="Profile Picture" class="card-photo">
+                <p class="card-name">Carlos Miguel Lopez</p>
+                
+                <div class="card-details">
+                    <div>
+                        <strong>Registration Number: 2023 / R-33445</strong> 
+                        
+                    </div>
+                    <div>
+                        <strong>Program / Year: M.A. International Relations / Y3</strong> 
+                        
+                    </div>
+                    <div>
+                        <strong>Email: c.lopez@student.edu</strong> 
+                        
+                    </div>
+                </div>
+                <button class="edit-button" onclick="alert('Editing Carlos Lopez...')">Edit Details</button>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer-container">
+        <div class="footer-links">
+            
+        </div>
+        <p>@Smart Student Profile Portal | Empowering Future Leaders</p>
+        <p>&copy; 2025 University Portal. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

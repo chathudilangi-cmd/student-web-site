@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Smart Student Profile Portal 🎓</title>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px; 
+        }
+
+        :root {
+            
+            --header-blue: rgba(62, 53, 7, 0.75); 
+            --light-text: #ffffff;
+            --dark-text: #333333;
+            --secondary-text: #fdf9f9;
+            --button-color: rgba(197, 171, 38, 0.75);
+            --page-bg: #f4f4f9; 
+            --form-border: #ddd;
+            --hero-overlay-color: rgba(0, 0, 0, 0.5); 
+            
+           
+            --footer-bg: #8B8000; 
+        }
+
+        
+        body {
+            background-color: var(--page-bg);
+            color: var(--dark-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        
+        .header-container {
+            width: 100%;
+            background-color: var(--header-blue);
+            padding: 0 40px; 
+            z-index: 20; 
+            color: var(--light-text);
+            position: relative; 
+        }
+        
+       
+        .header-top-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: none; 
+        }
+        
+        .main-nav li a:hover, .main-nav li a.active {
+            color: var(--secondary-text);
+            border-bottom: 2px solid var(--light-text); 
+        }
+        
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--light-text);
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+        
+        .top-utility a {
+            padding: 8px 15px;
+            border: 1px solid var(--light-text);
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0; 
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .main-nav li a {
+            padding: 10px 15px;
+            font-weight: 500;
+        }
+
+        .utility-links {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        .utility-links a {
+            margin-left: 25px;
+        }
+        
+        .search-icon::before { content: '🔍'; }
+        .menu-icon::before { content: '☰'; }
+
+
+        
+        .hero-section {
+            background: url('graduation-celebration-silhouettes-stockcake.jpg') no-repeat center center/cover;
+            position: relative;
+            padding: 80px 40px;
+            color: var(--light-text);
+            text-align: center;
+            z-index: 1; 
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--hero-overlay-color); 
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+       
+        .dashboard-wrapper {
+            flex-grow: 1;
+            padding: 40px 0; 
+            background-color: var(--page-bg);
+            background-image: none; 
+        }
+
+        .content-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 40px;
+            align-items: stretch;
+        }
+
+        
+        .contact-info-card, .contact-form-wrapper {
+            background-color: var(--light-text);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-info-card {
+            text-align: center;
+        }
+
+        .contact-info-card h3 {
+            font-size: 1.5rem;
+            color: var(--dark-text);
+            margin-bottom: 10px;
+        }
+        
+        .contact-info-card .icon-wrapper {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--button-color);
+        }
+        
+        .contact-info-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .contact-info-card .phone-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--header-blue);
+            display: block;
+            margin-top: 10px;
+        }
+
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--dark-text);
+            font-size: 0.95rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--form-border);
+            border-radius: 4px;
+            font-size: 1rem;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .submit-button {
+            background-color: var(--button-color);
+            color: var(--light-text);
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%; 
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            background-color: #e65245; 
+        }
+
+        
+        .footer-container {
+            width: 100%;
+            background-color: var(--footer-bg); 
+            padding: 30px 40px;
+            text-align: center;
+            color: var(--light-text);
+            border-top: 1px solid var(--header-blue);
+        }
+        
+        .footer-links {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            margin: 0 10px;
+            font-size: 0.95rem;
+            color: var(--light-text);
+            text-transform: capitalize;
+        }
+        .footer-links a:hover {
+            color: var(--secondary-text);
+        }
+
+
+       
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+            }
+            .header-top-info {
+                flex-direction: column;
+                padding: 10px 0;
+            }
+            .top-utility {
+                margin-top: 10px;
+            }
+            .main-nav ul {
+                display: none;
+            }
+            .content-container {
+                flex-direction: column; 
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <div class="header-top-info">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-icon">🎓</span> 
+                    Smart Student Profile Portal
+                </a>
+            </div>
+            <div class="top-utility">
+                <a href="#">LOGOUT</a>
+            </div>
+        </div>
+        
+        <header class="header-main">
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="subjects.html">Subjects</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="utility-links">
+                <a href="#" class="search-icon" aria-label="Search"></a>
+                <a href="#" class="menu-icon" aria-label="Menu"></a>
+            </div>
+        </header>
+    </div>
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Get in touch</h1>
+            <p>We'd love to hear from you. Here's how you can reach us...</p>
+        </div>
+    </div>
+    <main class="dashboard-wrapper">
+        <div class="content-container">
+            
+            <div class="contact-info-card">
+                <div class="icon-wrapper">📞</div>
+                <h3>Student Support Hotline</h3>
+                <p>
+                    Need assistance with registration, technical issues, or quick advice? Call our dedicated student line.
+                </p>
+                <span class="phone-number">+1 800 555 1234</span>
+                <p style="margin-top: 10px; font-size: 0.9rem;">
+                    *Available Mon-Fri, 9am - 5pm EST.
+                </p>
+            </div>
+            
+            <div class="contact-form-wrapper">
+                <h3>Send Us a Message</h3>
+                <p style="color:#666; margin-bottom: 20px;">
+                    Fill out the form below and we will respond to your email within 48 hours.
+                </p>
+                
+                <form action="#" method="POST" class="contact-form">
+                    
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required placeholder="Avery Thompson">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="a.thompson@student.edu">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required placeholder="I have a question about my Year 3 subjects..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">
+                        Contact Support
+                    </button>
+                    
+                </form>
+            </div>
+            
+        </div>
+    </main>
+    
+    <footer class="footer-container">
+        <div class="footer-links">
+            
+        </div>
+        <p style="color:var(--secondary-text);">@Smart Student Profile Portal | Empowering Future Leaders</p>
+        <p style="color:var(--secondary-text);">&copy; 2025 University Portal. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

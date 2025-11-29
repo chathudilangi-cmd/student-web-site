@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Smart Student Profile Portal 🎓</title>
+    <style>
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif; 
+        }
+
+        :root {
+            --header-blue: #002d62; 
+            --light-text: #ffffff;
+            --secondary-text: #cccccc;
+            --button-color: #002d62; 
+            --footer-bg: #001f40; 
+        }
+
+        body {
+            font-size: 16px; 
+            background-color: #10192e; 
+            color: var(--light-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--secondary-text);
+        }
+
+        .header-container {
+            width: 100%;
+            background-color: var(--header-blue);
+            padding: 0 40px; 
+            position: relative;
+            z-index: 10;
+        }
+        
+        .header-top-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem; 
+            font-weight: bold;
+            color: var(--light-text);
+        }
+
+        .logo-icon {
+            font-size: 2rem; 
+            margin-right: 10px;
+            line-height: 1;
+        }
+        
+        .top-utility a {
+            padding: 8px 15px;
+            border: 1px solid var(--light-text);
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0; 
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .main-nav li a {
+            padding: 10px 15px;
+            font-weight: 500;
+        }
+        
+        .main-nav li a.active {
+            border-bottom: 2px solid var(--light-text); 
+        }
+
+        .utility-links {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem; 
+        }
+
+        .utility-links a {
+            margin-left: 25px;
+        }
+        
+        .search-icon::before { content: '🔍'; }
+        .menu-icon::before { content: '☰'; }
+
+        .hero-section {
+            flex-grow: 1; 
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Graduation.jpg'); 
+            background-size: cover;
+            background-position: center bottom;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 150px 20px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin-top: 50px; 
+            text-align: center;
+        }
+
+        #greeting-text {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p:first-of-type { 
+            font-size: 1.5rem; 
+            font-weight: 500;
+            line-height: 1.4;
+            margin-bottom: 30px;
+        }
+
+        .hero-content p:nth-child(3) { 
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        .hero-button {
+            background-color: var(--light-text);
+            color: var(--button-color);
+            border: 2px solid var(--light-text);
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            display: inline-block; 
+        }
+
+        .hero-button:hover {
+            background-color: transparent;
+            color: var(--light-text);
+        }
+        
+        .footer-container {
+            width: 100%;
+            background-color: var(--footer-bg);
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 1px solid var(--header-blue);
+        }
+        
+        .footer-links {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            margin: 0 10px;
+            font-size: 0.95rem;
+            color: var(--secondary-text);
+            text-transform: capitalize;
+        }
+        
+        .footer-links a:hover {
+            color: var(--light-text);
+        }
+
+        .footer-container p {
+            font-size: 0.85rem;
+            margin: 5px 0;
+            color: var(--secondary-text);
+        }
+
+
+        @media (max-width: 1024px) {
+            .main-nav ul {
+                display: none; 
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container, .footer-container {
+                padding: 0 20px;
+            }
+            .header-top-info {
+                flex-direction: column;
+                padding: 10px 0;
+            }
+            .top-utility {
+                margin-top: 10px;
+            }
+            .hero-content p:first-of-type {
+                font-size: 1.2rem;
+            }
+            .footer-links a {
+                display: block; 
+                margin: 5px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <div class="header-top-info">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-icon">🎓</span> 
+                    Smart Student Profile Portal
+                </a>
+            </div>
+            <div class="top-utility">
+                <a href="#">LOGIN</a>
+            </div>
+        </div>
+        
+        <header class="header-main">
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="subjects.html">Subjects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="utility-links">
+                <a href="#" class="search-icon" aria-label="Search"></a>
+                <a href="#" class="menu-icon" aria-label="Menu"></a>
+            </div>
+        </header>
+    </div>
+
+    <main class="hero-section">
+        <div class="hero-content">
+            <h1 id="greeting-text"></h1>
+            
+            <p> 
+                A smart student is a hardworking, motivated, and responsible learner who has strong academic skills, good communication, and the ability to solve problems creatively. They are confident, respectful, and eager to learn new things. They use technology effectively, manage time well, and work well with others. A smart student has clear goals for the future, participates in school activities, and keeps improving through dedication and discipline.
+            </p>
+            <p>The Future is Yours. And It Starts Now.</p>
+            <a href="profile.html" class="hero-button">Make Your Way</a>
+        </div>
+    </main>
+
+    <footer class="footer-container">
+        <div class="footer-links">
+            
+        </div>
+        <p>@Smart Student Profile Portal | Empowering Future Leaders</p>
+        <p>&copy; 2025 University Portal. All Rights Reserved.</p>
+    </footer>
+
+    
+    <script>
+function displayDynamicGreeting() {
+    
+    const date = new Date();
+    const hour = date.getHours();
+    let greeting;
+
+    
+    if (hour < 12) {
+        greeting = "Good Morning, Future Leader! ☀️"; 
+    } else if (hour < 18) {
+        greeting = "Good Afternoon, Future Leader! 🌅"; 
+    } else {
+        greeting = "Good Evening, Future Leader! 🌙"; 
+    }
+
+    
+    const greetingElement = document.getElementById('greeting-text');
+    if (greetingElement) {
+        greetingElement.textContent = greeting;
+    }
+}
+
+
+function initDynamicBehavior() {
+    
+    displayDynamicGreeting(); 
+    setInterval(displayDynamicGreeting, 30000); 
+}
+document.addEventListener('DOMContentLoaded', initDynamicBehavior);
+</script>
+</body>
+</html>
